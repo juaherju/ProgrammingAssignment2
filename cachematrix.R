@@ -13,6 +13,8 @@
 makeCacheMatrix <- function(x = matrix()) {
 
       inverseMatrix <- NULL
+      
+      ##if the matrix content changes the inverseMatrix is reset to perform a new calculation      
       set <- function(y) {
             x <<- y
             inverseMatrix <<- NULL
@@ -38,16 +40,16 @@ cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
       
       inverseMatrix <- x$getinverse()
+      ##if inversMatrix is not null we pick the cached value
       if(!is.null(inverseMatrix)) {
             message("getting cached data")
             return(inverseMatrix)
       }
+      ## if not, data may be changed so we update data values and perform calculation again
       data <- x$get()
       inverseMatrix <- solve(data)
       x$setinverse(inverseMatrix)
       inverseMatrix      
       
-      
-      
-      
+
 }
